@@ -1,35 +1,22 @@
-def remove_duplicates(sequence):
-    seen = set()  # Create an empty set to keep track of seen elements
-    result = []   # Initialize an empty list to store the unique elements in order
-    
-    for item in sequence:
-        if item not in seen:
-            seen.add(item)
-            result.append(item)
-    
-    return result
+def digit_sum(num):
+        return sum(int(digit) for digit in str(num))
 
-# Test case 1
-input_sequence = [2, 3, 2, 4, 5, 3, 6, 7, 5]
-result = remove_duplicates(input_sequence)
-print(result)  # Output: [2, 3, 4, 5, 6, 7]
+def solution(A):
+    max_sum = -1
 
-# Test case 2
-input_sequence1 = [1, 2, 3, 4, 5]
-result1 = remove_duplicates(input_sequence1)
-print(result1)  # Output: [1, 2, 3, 4, 5] (no duplicates)
+    # Iterate through all pairs of numbers in the array
+    for i in range(len(A)):
+        for j in range(i + 1, len(A)):
+            sum_i = digit_sum(A[i])
+            sum_j = digit_sum(A[j])
 
-# Test case 3
-input_sequence2 = [1, 1, 1, 1, 1]
-result2 = remove_duplicates(input_sequence2)
-print(result2)  # Output: [1] (all elements are duplicates)
+            # Check if the sums of digits are equal
+            if sum_i == sum_j:
+                # Update the maximum sum if the current sum is greater
+                max_sum = max(max_sum, A[i] + A[j])
 
-# Test case 4
-input_sequence3 = ['apple', 'banana', 'cherry', 'apple', 'date', 'banana']
-result3 = remove_duplicates(input_sequence3)
-print(result3)  # Output: ['apple', 'banana', 'cherry', 'date'] (removing string duplicates)
+    return max_sum
 
-# Test case 5
-input_sequence5 = [(1, 2), (2, 3), (1, 2), (4, 5), (2, 3)]
-result5 = remove_duplicates(input_sequence5)
-print(result5)  # Output: [(1, 2), (2, 3), (4, 5)] (removing tuple duplicates)
+print(solution([51, 71, 17, 42])) 
+print(solution([42, 33, 60]))       
+print(solution([51, 32, 43]))       
